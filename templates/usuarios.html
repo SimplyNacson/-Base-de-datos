@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+<body>
+    <link rel="stylesheet" href="../statics/styles.css">
+    <h1>Usuarios Registrados</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acciones</th> <!-- Nueva columna para botones de acción -->
+        </tr>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario[0] }}</td>
+            <td>{{ usuario[1] }}</td>
+            <td>{{ usuario[2] }}</td>
+            <td>
+                <form action="{{ url_for('actualizar_usuario', id=usuario[0]) }}" method="get" style="display:inline;">
+                    <input type="submit" value="Actualizar">
+                </form>
+                <form action="{{ url_for('eliminar_usuario', id=usuario[0]) }}" method="post" style="display:inline;">
+                    <input type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
